@@ -45,7 +45,7 @@ public class PageEventHandler {
     public Function<KStream<String, PageEvent>, KStream<String, Long>> kStream(){
         return (input)->
             input
-                .filter((k,v)->v.duration()>100)
+                //.filter((k,v)->v.duration()>100)
                 .map((k,v)->new KeyValue<>(v.name(), 0L))
                 .groupByKey(Grouped.with(Serdes.String(), Serdes.Long()))
                 .windowedBy(TimeWindows.of(Duration.ofSeconds(5)))
